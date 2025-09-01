@@ -1,0 +1,42 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: pe.ffernacu.kafka-controller
+
+  cloud.stream:
+    function:
+      definition:
+        consumer,
+        producer
+    bindings:
+      consumer-in-0:
+        destination: ${TOPIC_NOTIFICATION:topic-notification}
+        group: ${TOPIC_NOTIFICATION:topic-notification}-cg-01
+        consumer:
+          useNativeDecoding: true
+      producer-out-0:
+        destination: ${TOPIC_HANDLE:topic-handle}
+        contentType: application/*+avro
+        producer:
+          useNativeEncoding: true
+    kafka:
+      binder:
+        brokers: ${BROKER_SERVER:localhost:9092}
+        autoCreateTopics: false
+        configuration:
+          acks: all
+          retries: 1
+          allow.auto.create.topics: false
+          auto.offset.reset: earliest
+          sasl.mechanism: PLAIN
+          security.protocol: PLAINTEXT
+      bindings:
+        consumer-in-0:
+          consumer:
+            configuration:
+              value.deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+    instanceCount: 1
+    instanceIndex: 0
+    bindingsRetryIntervals: 10
+

@@ -1,0 +1,32 @@
+{
+  "type": "record",
+  "name": "EventPublisherExecution",
+  "namespace": "pe.ffernacu.domain.avro",
+  "fields": [
+    {
+      "name": "fileName",
+      "type": "string"
+    },
+    {
+      "name": "accounts",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "Account",
+          "fields": [
+            {
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "name": "type",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    }
+
+  ]
+}
