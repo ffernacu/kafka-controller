@@ -1,0 +1,11 @@
+name: Alerta de nuevo Issue
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  saludo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Imprimir mensaje
+        run: echo "¡Se ha creado un nuevo issue con éxito!"
